@@ -4,11 +4,17 @@
 
 - ##### 평가기준 : logloss
 
+- ##### 최종결과 : (private : 58위 / 287)
+
+![final_record](./마크다운_이미지/final_record.png)
 
 
 
 
-## 1. 진행과정
+
+
+
+## 진행과정
 
 ### (1) 데이터 불러오기 및 전처리
 
@@ -80,7 +86,7 @@
   print(x_train.shape, x_test.shape)
   ```
 
-## (2) 딥러닝 모델 적용
+## (2) 초기 딥러닝 모델 적용
 
 - **악플탐지봇**을 구현하면서 배운 `CNN`과 `LSTM`을 이용하여 초기 모델을 구축하였습니다.
 
@@ -163,5 +169,57 @@
   
   ```
 
-##### 하지만,
+##### 그러나,
+
+- 대회에서 제공한 전처리와 단순한 딥러닝 모델로써는 아래와 같이 logloss가 약 0.5를 웃도는 좋지 않은 성능을 내었습니다.
+
+- 각 제출마다 정확한 모델 구조는 기억이 나지 않습니다. 죄송합니다
+
+- 하지만, 위 모델 구조에서 활성화 함수를 relu에서 mish로 변경하거나`Conv1D`, `LSTM`, `Dense`의 노드 개수만 바꾸는 정도의 변화만 주었습니다.
+
+  ![그림2](./마크다운_이미지/그림2.png)
+
+  ![그림1](./마크다운_이미지/그림1.png)
+
+
+
+#### 더 이상 위의 구조에서 모델의 성능을 높이는 것은 무리라고 생각하였고, 다른 방법을 찾아야 했습니다.
+
+
+
+## (3) Word Embedding 사용 : FastText, Glove
+
+- 모델의 성능을 더욱 높이기 위해, 구글링을 하였고 '자연어처리의 성능은 Embedding과정에 달려있다'는 유튜브 영상을 보았습니다.
+- 그래서 모델의 성능을 높이기 위해 토큰의 단위인 단어를 Embedding하는 `FastText`, `Glove`를 사용하였습니다.
+
+#### FastText
+
+```python
+!pip install fasttext
+import fasttext
+import fasttext.util
+```
+
+- FastText Vector가 아닌 model을 사용하였기에 불러오는 시간이 오래걸렸습니다.
+
+```python
+print(f"== LOAD fasttext START at {datetime.datetime.now()}")
+ft = fasttext.load_model('/content/drive/MyDrive/FastText/cc.en.300.bin')
+print(f"== LOAD fasttext   END at {datetime.datetime.now()}")
+```
+
+```python
+# 임베딩테이블 만들기
+
+embedding_dim = 300
+embedding_matrix = np.zeros( (len(word_index)+1, embedding_dim) )
+for word, idx in word_index.items():
+    embedding_vector = ft.get_word_vector(word)
+    if embedding_vector is not None :
+        embedding_matrix[idx] = embedding_vector
+```
+
+
+
+#### Glove
 
