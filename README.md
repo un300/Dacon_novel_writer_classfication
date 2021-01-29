@@ -1,13 +1,11 @@
 # Dacon 소설 작가 분류 AI 경진대회
-
-- ##### 참여기간 : 2020.11.23 ~ 2020.12.04
-
-- ##### 평가기준 : logloss
-
-- ##### 최종결과 : 상위 21% (private : 58위 / 287)
+- ##### 대회진행기간 : 2020.10.29 ~ 2020.12.04 
+- ##### 참여기간     : 2020.11.23 ~ 2020.12.04
+- ##### 평가기준     : logloss
+- ##### 최종결과     : 상위 21% (private : 58위 / 287)
 - https://dacon.io/competitions/official/235670/mysubmission/
 
-![final_record](./마크다운_이미지/final_record.png)
+![final_record](https://user-images.githubusercontent.com/54063179/106223881-9f3fc280-6225-11eb-8572-6ae19c1d052b.PNG)
 
 
 
@@ -176,9 +174,9 @@
 
 - 그래서, 위 모델 구조에서 활성화 함수를 relu에서 mish로 변경하거나`Conv1D`, `LSTM`, `Dense`의 노드 개수만 바꾸는 정도로 눈에띄는 성능 향상을 기대할 수 없었습니다.
 
-  ![그림2](./마크다운_이미지/그림2.png)
+  ![그림2](https://user-images.githubusercontent.com/54063179/106223941-baaacd80-6225-11eb-973f-68875429a2e8.PNG)
 
-  ![그림1](./마크다운_이미지/그림1.png)
+  ![그림1](https://user-images.githubusercontent.com/54063179/106223901-aa92ee00-6225-11eb-8f0d-c002bde59160.PNG)
 
 
 
@@ -278,7 +276,8 @@ def get_model() :
 
 
 #### Word Embedding 적용 결과
-![그림1](./마크다운_이미지/after_embedding.png)
+![after_embedding](https://user-images.githubusercontent.com/54063179/106223841-86cfa800-6225-11eb-8588-df10f33b7f31.PNG)
+
 
 - 임베딩을 적용하기 전 약 0.5대의 logloss를 보였지만 임베딩 적용 후 약 0.3점 대로 눈에띄는 향상을 보여주었습니다.
 
